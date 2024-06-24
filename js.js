@@ -30,34 +30,48 @@ function playRound(){
 
     if(computerChoice == humanChoice){
         draws++;
-        return "Draw";
+        return console.log("Draw");
     } else {
         if(computerChoice == "rock"){
             if(humanChoice == "paper"){
                 humanPoints++;
-                return "Human wins";
+                return console.log("Human wins round");
             } else {
                 computerPoints++;
-                return "Computer wins";
+                return console.log("Computer wins round");
             }
         } else if(computerChoice == "paper"){
             if(humanChoice == "scissor"){
                 humanPoints++;
-                return "Human wins";
+                return console.log("Human wins round");
             } else {
                 computerPoints++;
-                return "Computer wins";
+                return console.log("Computer wins round");
             }
         } else {
             if(humanChoice == "rock"){
                 humanPoints++;
-                return "Human wins";
+                return console.log("Human wins round");
             } else {
                 computerPoints++;
-                return "Computer wins";
+                return console.log("Computer wins round");
             }
         }
     }
 }
 
-console.log(playRound());
+function playGame(){
+    for(i = 0; i < 5; i++){
+        playRound();
+        console.log("");
+    }
+    console.log("Human points: " + humanPoints);
+    console.log("Computer points: " + computerPoints);
+    if(humanPoints > computerPoints){
+        console.log("Human is the winner");
+    } else{
+        console.log("Computer is the winner");
+    }
+}
+
+playGame();
