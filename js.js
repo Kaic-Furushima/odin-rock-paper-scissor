@@ -10,3 +10,10 @@ function getComputerChoice(){
         return "scissor";
     }
 }
+
+function getHumanChoice(){
+    do{
+        choice = prompt("Rock, paper or scissor?").toLowerCase();
+    } while(choice != "rock" && choice != "paper" && choice != "scissor");
+    return choice;
+}
