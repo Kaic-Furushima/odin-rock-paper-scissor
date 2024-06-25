@@ -73,5 +73,3 @@ function playGame(){
         console.log("Computer is the winner");
     }
 }
-
-playGame();
