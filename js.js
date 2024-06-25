@@ -14,40 +14,75 @@ function getComputerChoice(){
     }
 }
 
-function playRound(humanChoice){
-    computerChoice = getComputerChoice();
-
-    console.log(humanChoice);
-    console.log(computerChoice);
-
-    if(computerChoice == humanChoice){
-        draws++;
-        return console.log("Draw");
+function determineWinnerRound(winner){
+    let result = document.createElement("p");
+    if(winner == "human"){
+        humanPoints++;
+        result.textContent = "Human wins round";
+    } else if(winner == "computer"){
+        computerPoints++;
+        result.textContent = "Computer wins round";
     } else {
-        if(computerChoice == "rock"){
-            if(humanChoice == "paper"){
-                humanPoints++;
-                return console.log("Human wins round");
-            } else {
-                computerPoints++;
-                return console.log("Computer wins round");
-            }
-        } else if(computerChoice == "paper"){
-            if(humanChoice == "scissor"){
-                humanPoints++;
-                return console.log("Human wins round");
-            } else {
-                computerPoints++;
-                return console.log("Computer wins round");
-            }
+        draws++;
+        result.textContent = "Draw";
+    }
+    SHOW_RESULTS.appendChild(result);
+}
+
+function determineWinnerGame(winner){
+    let result = document.createElement("p");
+    if(winner == "human"){
+        humanPoints++;
+        result.textContent = "Human wins the game";
+    } else if(winner == "computer"){
+        computerPoints++;
+        result.textContent = "Computer wins the game";
+    } else {
+        draws++;
+        result.textContent = "The game ends in draw";
+    }
+    SHOW_RESULTS.appendChild(result);
+}
+
+function playRound(humanChoice){
+    if((humanPoints + computerPoints + draws) < 5){
+        computerChoice = getComputerChoice();
+
+        console.log(humanChoice);
+        console.log(computerChoice);
+
+        if(computerChoice == humanChoice){
+            determineWinnerRound("draw");
         } else {
-            if(humanChoice == "rock"){
-                humanPoints++;
-                return console.log("Human wins round");
+            if(computerChoice == "rock"){
+                if(humanChoice == "paper"){
+                    determineWinnerRound("human");
+                } else {
+                    determineWinnerRound("computer");
+                }
+            } else if(computerChoice == "paper"){
+                if(humanChoice == "scissor"){
+                    determineWinnerRound("human");
+                } else {
+                    determineWinnerRound("computer");
+                }
             } else {
-                computerPoints++;
-                return console.log("Computer wins round");
+                if(humanChoice == "rock"){
+                    determineWinnerRound("human");
+                } else {
+                    determineWinnerRound("computer");
+                }
             }
+        }
+    }
+
+    if ((humanPoints + computerPoints + draws) == 5){
+        if(humanPoints > computerPoints){
+            determineWinnerGame("human");
+        } else if(humanPoints < computerPoints) {
+            determineWinnerGame("computer");
+        } else {
+            determineWinnerGame("draw");
         }
     }
 }
@@ -55,7 +90,9 @@ function playRound(humanChoice){
 const ROCK = document.querySelector("#rock");
 const PAPER = document.querySelector("#paper");
 const SCISSOR = document.querySelector("#scissor");
+const SHOW_RESULTS = document.querySelector("#showResult");
 
 ROCK.addEventListener("click", () => playRound("rock"));
 PAPER.addEventListener("click", () => playRound("paper"));
 SCISSOR.addEventListener("click", () => playRound("scissor"));
+
