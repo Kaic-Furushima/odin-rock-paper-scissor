@@ -29,12 +29,12 @@ function determineWinnerRound(winner){
     SHOW_RESULTS.appendChild(result);
 }
 
-function determineWinnerGame(winner){
+function determineWinnerGame(){
     let result = document.createElement("p");
-    if(winner == "human"){
+    if(humanPoints > computerPoints){
         humanPoints++;
         result.textContent = "Human wins the game";
-    } else if(winner == "computer"){
+    } else if(humanPoints < computerPoints){
         computerPoints++;
         result.textContent = "Computer wins the game";
     } else {
@@ -77,13 +77,7 @@ function playRound(humanChoice){
     }
 
     if ((humanPoints + computerPoints + draws) == 5){
-        if(humanPoints > computerPoints){
-            determineWinnerGame("human");
-        } else if(humanPoints < computerPoints) {
-            determineWinnerGame("computer");
-        } else {
-            determineWinnerGame("draw");
-        }
+        determineWinnerGame();
     }
 }
 
