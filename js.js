@@ -14,16 +14,8 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    do{
-        choice = prompt("Rock, paper or scissor?").toLowerCase();
-    } while(choice != "rock" && choice != "paper" && choice != "scissor");
-    return choice;
-}
-
-function playRound(){
+function playRound(humanChoice){
     computerChoice = getComputerChoice();
-    humanChoice = getHumanChoice();
 
     console.log(humanChoice);
     console.log(computerChoice);
@@ -60,16 +52,10 @@ function playRound(){
     }
 }
 
-function playGame(){
-    for(i = 0; i < 5; i++){
-        playRound();
-        console.log("");
-    }
-    console.log("Human points: " + humanPoints);
-    console.log("Computer points: " + computerPoints);
-    if(humanPoints > computerPoints){
-        console.log("Human is the winner");
-    } else{
-        console.log("Computer is the winner");
-    }
-}
+const ROCK = document.querySelector("#rock");
+const PAPER = document.querySelector("#paper");
+const SCISSOR = document.querySelector("#scissor");
+
+ROCK.addEventListener("click", () => playRound("rock"));
+PAPER.addEventListener("click", () => playRound("paper"));
+SCISSOR.addEventListener("click", () => playRound("scissor"));
